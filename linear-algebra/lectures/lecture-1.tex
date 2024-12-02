@@ -1,0 +1,214 @@
+\section{Лекция 2.12.2024}
+
+
+\subsection{Ранг матрицы}
+
+
+$V$ - векторное пространство над $F$
+
+
+\begin{definition}
+
+    \textit{Ранг Матрицы} $rk(S) = \max\{|S|, S' \subseteq S, \text{$S$ - линейно независимо}\}$
+
+    \begin{enumerate}
+        \item Столбцовый Ранг
+        \item Строковый Ранг
+    \end{enumerate}
+
+\end{definition}
+
+
+\begin{proposition}
+
+    \textit{Ранг матрицы равен размерности подпространства}
+
+\end{proposition}
+
+
+\begin{lemma}
+
+    При элементраных преобразованиях строк сохраняются все линейные зависимости между стобцами.
+
+    $rk(A)$ не меняется при элементарных преобразованиях строк.
+
+    $$A \rightarrow B: \;\; <A^{(1)}, \dots, A^{(n)}> = <B^{(1)}, \dots, B^{(n)}>$$
+
+    \begin{proof}~
+
+        \begin{enumerate}
+            \item $B^{(i)} \in <A^{(1)}, \dots, A^{(n)}>$
+            \item Так как все элементарные преобразования обратимы, то включение ваерно и в обратную сторону
+            \item Ранг матрицы не меняется при элементарных преобразованиях столбцов 
+            \item Строковый ранг матрицы не менчяется при элементарных преобразованиях строк и столбцов
+        \end{enumerate}
+
+    \end{proof}
+
+\end{lemma}
+
+
+\begin{lemma}[$rk A = rk A^T$]
+
+    Если $A$ имеет улучшенный ступенчатый вид, то $rk A = rk A^T$, причем оба числа равны количеству ненулвеых строк в $A$
+
+    \begin{proof}
+        
+        \begin{enumerate}
+            \item Пусть $r$ - число ненулевых строк в $A$
+            \item Тогда:
+            $$e_1, \dots, e_r \subseteq \{A^{(1)}, \dots, A^{(n)}\}, \;\; r = \begin{pmatrix}
+                0 \\ \vdots \\ 1 \\ \vdots \\ 0
+            \end{pmatrix}$$
+            $$<e_1, \dots, e_r> \subseteq <A^{(1)}, \dots, A^{(n)}>$$
+            \item С другой стороны $\forall i: A^{(i)} \in <e_1, \dots, e_r$
+            $$\Rightarrow <A^{(1)}, \dots, A^{(n)}> \subseteq <e_1, \dots, e_r>$$
+            \item Получаем:
+            $$<A^{(1)}, \dots, A^{(n)}> = <e_1, \dots, e_r> \Rightarrow rk A = dim<e_1, \dots, e_r> = r$$
+            \item Покажем, что $rk A^T = r$. Достаточно доказать, что строки $A^{(i)}$ линейно независимы. Пусть $1 \leq i_1 \leq \dots \leq n$ - номера ведущих элементов строк в $A$ и пусть $\alpha_1 A_{(1)} + \dots + \alpha_n A_{(n)} = \vec{0}$ для некоторых $\alpha_i \in F$. $i_k$ строка координата в левой части равна $\alpha_k \Rightarrow \alpha_k = 0$.
+        \end{enumerate}
+
+    \end{proof}
+    
+\end{lemma}
+
+
+\begin{lemma}
+    
+    $rk A$ равно $rk A^T$, что также равно количеству ненулевых строк в ступенчатом виде.
+
+\end{lemma}
+
+
+Пусть $A \in Mat_{n}(F)$.
+
+
+\begin{lemma}
+
+    $rk A = n \Leftrightarrow \det A \not= 0$ и $rk A < n \Leftrightarrow \det A = 0$
+
+    \begin{proof}
+
+        \begin{enumerate}
+            \item При приведении $A$ к ступенчатому виду при помощи элементарных преобразованиях строк, $rk A$ не меняется, ведь условие равенства определителя 0 не меняется
+            \item В случае ступенчатого вида $rk A < n \Rightarrow \exists i : A_{(i)} = \vec{0} \Rightarrow \det A = 0$
+            \item В случае ступенчатого вида $rk A = n \Rightarrow \text{Матрица является верхнетреугольной} \Rightarrow \det A \not= 0$ (так как элементы на диагонали не равны 0) 
+        \end{enumerate}
+        
+    \end{proof}
+    
+\end{lemma}
+
+
+\begin{definition}
+    
+    \textit{Подматрица матрицы $A$} - любая матрица, полученная из исходной вычеркиванием каких-то строк и/или столбцов
+
+\end{definition}
+
+
+\begin{lemma}
+    
+    Ранг подматрицы не больше ранга матрицы
+
+    \begin{proof}~
+        Если какие-то столбцы в $S$ линейно независимые, то соответствующие столбцы в $A$ и подавно линейно независимые.
+    \end{proof}
+
+\end{lemma}
+
+
+\begin{definition}
+    
+    \textit{Минор матрицы $A$} - определитель произвольной квадратной матрицы, являющейся подматрицей в $A$
+
+\end{definition}
+
+
+\begin{definition}
+    
+    \textit{Базисные миноры} - Ненулевые миноры в $A$
+
+\end{definition}
+
+
+\begin{theorem}
+    
+    $$\forall A \in Mat_{m \times n}$$
+
+    Следующие 3 числа равны:
+
+    \begin{enumerate}
+        \item $rk A$
+        \item $rk A^T$
+        \item Наибольший порядок ненулевого минора в $A$
+    \end{enumerate}
+
+    \begin{proof}~
+        \begin{enumerate}
+            \item Мы знаем, что $I = II$
+            \item Пусть $S$ - квадратная подматрица в $A$, размера $r$ и $\det S \not= 0$. Тогда $r = rk S \leq rk A \Rightarrow III \leq I$
+            \item Обратно пусть $rk A = r$. Тогда в $A$ есть $r$ столбцов, которые линейно независимые. Пусть $B$ - подмножество в $A$, составленная из этих столбцов. Тогда $rk B = r \Rightarrow $ В $B$ есть $r$ линейно независимых строк.
+            \item Пусть $S$ - подматрица размера $r \times r$, составленная из этих строк. Тогда $rk S = r \Rightarrow \det S \not= 0 \Rightarrow III \geq I$
+            \item $III = I$
+        \end{enumerate}
+    \end{proof}
+
+\end{theorem}
+
+
+\subsection{Применения ранга матрицы к СЛУ}
+
+
+Рассмотрим $Ax = b, A \in Mat_{m \times n}(F), x \in F^n, b \in F^m$
+
+
+\begin{theorem}[Теорема Кронекера-Копели]
+    
+    СЛУ совместна тогда и только тогда $rk A = rk (A|b)$
+
+    \begin{proof}~
+        \begin{enumerate}
+            \item множество решений сохранится
+            \item $rk A$ и $rk (A|b)$ не меняется
+            \item Система  случаем, когда $(A|b)$ имеет ступенчатый вид. 
+            \item А такая система будет иметь равный ранг, если не будет строк вида $0, \dots, 0, b \not= 0$
+        \end{enumerate}
+    \end{proof}
+
+\end{theorem}
+
+
+\begin{theorem}
+    
+    Пусть СЛУ совместна. Система имеет единственное решение тогда и только тогда $rk A = n$ ($n$ - число независимых)
+
+    \begin{proof}~
+        Снова все сводится к ситуации, когда $(A|b)$ имеет ступенчатый вид; В таком случае решение единственное тогда и только тогда, когда нет свободных переменных, а значит главных переменных ровно $n$, а значит число ненулевых строк равно $n \Leftrightarrow rk A = n$
+    \end{proof}
+
+\end{theorem}
+
+
+\begin{lemma}
+    
+    Система имеет единственное решение тогда и только тогда, когда определитель не равен 0
+
+    \begin{proof}~
+        \begin{enumerate}
+            \item $\textbf{Единственность решения} \Rightarrow$ $rk A \Rightarrow rk A = rk (A|b) = n$
+            \item $\det A \not= 0 \Rightarrow rk A \Rightarrow rk (A|b) = rk A = n \Rightarrow \text{СЛУ совместна и имеет одно решение}$
+        \end{enumerate}
+    \end{proof}
+
+\end{lemma}
+
+
+Пусть теперь СЛУ: $Ax = 0$. Пусть $S \subseteq F^n$ - множество ее решений
+
+
+\begin{lemma}
+    
+    $dim S = n - rk A$
+
+\end{lemma}
