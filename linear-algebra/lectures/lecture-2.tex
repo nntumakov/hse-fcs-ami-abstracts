@@ -1,0 +1,233 @@
+\section{Лекция 9.12.2024}
+
+
+\begin{proposal}
+    
+    $$b_1, \dots, b_p \in F^n$$
+    $$B = \left(b_1, \dots, b_p\right) \in Mat_{n \times p}(F)$$
+
+    Пусть $a_1, \dots, a_q$ - ФСР для ОСЛУ $B^Tx = 0$
+    $$A = \left(a_1, \dots, a_q\right) \in Mat_{n \times q}$$
+
+    Тогда $(b_1, \dots, b_p)$ - множество решений ОСЛУ $A^Tx = 0$
+
+    \begin{proof}~
+
+        \begin{enumerate}
+            \item Пусть $S = \{x \in F^n | A^Tx = 0\}$
+            \item $\forall i$ имеем $B^Ta_i = 0 \Rightarrow B^TA = 0 \Rightarrow A^TB = 0 \Rightarrow \forall j: A^Tb_j = 0 \Rightarrow b_1, \dots, b_p \in S \Rightarrow <b_1, \dots, b_p> \subseteq S$
+            \item Пусть $r = rk\{b_1, \dots, b_p\} = \dim<b_1, \dots, b_p> = rk B = rk B^T$
+            \item При этом $rk A = q = n - r$ (Из прошлой лекции)
+            \item Тогда $\dim S = n - q = n - (n - r) = r \Rightarrow \dim S = \dim<b_1, \dots, b_p> \rightarrow S = <b_1, \dots, b_p>$
+        \end{enumerate}
+        
+    \end{proof}
+
+    \begin{corollary}
+        
+        Всякое подпространство в $F^n$ является множеством решений некоторой ОСЛУ.
+
+    \end{corollary}
+
+\end{proposal}
+
+
+\bigskip
+
+
+\subsection{Различные базисы}
+
+
+Пусть $V$ - некоторое векторное пространство над $F$, пусть $\dim V = n$
+
+
+Фиксируем некоторый базис (Отныне базисы считаем последовательностью, а не множеством):
+
+
+$$\begin{pmatrix}
+    e_1 & \dots & e_n
+\end{pmatrix}$$
+
+
+Знаем, что $\forall v \in V \exists! (x_1, \dots, x_n): x_1 \cdot e_1 + \dots + x_n \cdot e_n = v$
+
+
+\begin{definition}
+
+    \textit{Координатами вектора $v$} называется последовательность скаляров $(x_1, \dots, x_n)$ в базисе $(e_1, \dots, e_n)$
+
+    \begin{example}
+
+        $V = F^n, v = \begin{pmatrix}
+            x_1 \\ \vdots \\ x_n
+        \end{pmatrix} \in F^n$, тогда $x_1, \dots, x_n$ - координаты вектора $v$ в стандартном базисе
+
+    \end{example}
+    
+\end{definition}
+
+
+\bigskip
+
+
+\begin{proposal}
+    
+    Пусть $e_1', \dots e_n'$ - какой-то набор векторов из $n$ векторов:
+    $$e_i' = c_{1i} e_1 + \dots + c_{ni} e_n$$
+    $$(e_1', \dots, e_n') = (e_1, \dots, e_n) \cdot C, \; C = \left(c_{ij}\right)$$
+
+    \textit{$(e_1', \dots, e_n')$ - базис в $V$ тогда и только тогда $\det C \not= 0$}
+
+    \begin{proof}~
+        
+        \begin{enumerate}
+            \item $(e_1', \dots, e_n')$ - базис в $V$, тогда $(e_1', \dots, e_n') = (e_1, \dots, e_n) \cdot C$ для некоторой $C' \in M_n$
+            \item $(e_1, \dots, e_n) = (e_1, \dots, e_n) \cdot C \cdot C'$
+            \item Так как векторы $e_1, \dots, e_n$ линейно независимы, то $j$ столбец будет равен столбцу, у которого стоит единственный ненулевой элемент, равный единице на $j$ позиции. Следовательно $C \cdot C' = E \Rightarrow \det C \not= 0$
+            \item Докажем, что $e_1', \dots, e_n'$ линейно независимы (и тогда раз их $n$ штук они образуют базис в $V$)
+            \item Пусть $\alpha_1 \cdot e_1' + \dots + \alpha_n \cdot e_n' = 0$, тогда:
+            $$(e_1', \dots, e_n') \cdot \begin{pmatrix}
+                \alpha_1 \\ \vdots \\ \alpha_n
+            \end{pmatrix} = 0 \Rightarrow (e_1, \dots, e_n) \cdot C \cdot \begin{pmatrix}
+                \alpha_1 \\ \vdots \\ \alpha_n
+            \end{pmatrix} = 0$$
+            \item так как $e_1, \dots, e_n$ линейно независимы, то $C \cdot \begin{pmatrix}
+                \alpha_1 \\ \vdots \\ \alpha_n
+            \end{pmatrix} = 0$. Так как $\det C \not= 0$, то $\exists C^{-1} \Rightarrow $, умножая на $C^{-1}$ слева, полученная $\begin{pmatrix}
+                \alpha_1 \\ \vdots \\ \alpha_n
+            \end{pmatrix} = \begin{pmatrix}
+                0 \\ \vdots \\ 0
+            \end{pmatrix}$ линейно независимы, то это базис
+        \end{enumerate}
+
+    \end{proof}
+
+\end{proposal}
+
+
+\bigskip
+
+
+\begin{definition}
+    
+    Пусть $(e_1, \dots, e_n)$ и $(e'_1, \dots, e_n')$ - два базиса в $V$. $(e_1, \dots, e_n) = (e'_1, \dots, e_n') \cdot C, \; C \in M_n(F), \det C \not= 0$
+
+    \textit{Матрицей перехода} от базиса $(e_1, \dots, e_n)$ к базису $(e'_1, \dots, e_n')$ называется матрица $C$
+
+    В столбце $C^{(j)}$ записаны координаты вектора $e'_j$ в базисе $(e_1, \dots, e_n)$.
+
+    \begin{comment}
+        
+        Из свойства следует, что $(e_1, \dots, e_n) = (e'_1, \dots, e'_n) \cdot C^{-1}$
+
+    \end{comment}
+
+\end{definition}
+
+
+\bigskip
+
+
+\begin{proposal}
+    
+    $$\begin{pmatrix}
+        x_1 \\ \vdots \\ x_n
+    \end{pmatrix} = C \cdot \begin{pmatrix}
+        x'_1 \\ \vdots \\ x'_n
+    \end{pmatrix}$$
+
+    \begin{proof}~
+        
+        \begin{enumerate}
+            \item $v = \begin{pmatrix}
+                e_1 & \dots & e_n
+            \end{pmatrix} \cdot \begin{pmatrix}
+                x_1 \\ \vdots \\ x_n
+            \end{pmatrix} = \begin{pmatrix}
+                e'_1 & \dots & e'_n
+            \end{pmatrix} \cdot \begin{pmatrix}
+                x'_1 \\ \vdots \\ x'_n
+            \end{pmatrix} = \begin{pmatrix}
+                e_1 & \dots & e_n
+            \end{pmatrix} \cdot \begin{pmatrix}
+                x'_1 \\ \vdots \\ x'_n
+            \end{pmatrix}$
+            \item Так как $e_1, \dots, e_n$ - линейно независимы, то $\begin{pmatrix}
+                x_1 \\ \vdots \\ x_n
+            \end{pmatrix} = C \cdot \begin{pmatrix}
+                x'_1 \\ \vdots \\ x'_n
+            \end{pmatrix}$
+        \end{enumerate}
+
+    \end{proof}
+
+\end{proposal}
+
+
+\bigskip
+
+
+\begin{proposal}
+    
+    $U, W \subseteq V$ - два подпространства. Тогда $U \cap W$ - тоже подпространство
+
+\end{proposal}
+
+
+\bigskip
+
+
+\begin{definition}
+    
+    \textit{Суммой двух подпространств} называется $U + W = \{u + w | u \in U, w \in W\}$
+
+\end{definition}
+
+
+\bigskip
+
+
+\begin{comment}
+
+    Так как $U \cap W \subseteq U = U + \{0\} \subseteq U + W$, то $\dim U \cap W \leq \dim U \leq \dim U + W$
+
+\end{comment}
+
+
+\bigskip
+
+
+\begin{theorem}
+    
+    $\dim U \cap W + \dim U + W = \dim U + \dim W$
+
+    \begin{example}~
+        
+        \begin{enumerate}
+            \item $V = \RR^3$, следовательно две любые плоскости содержат общую прямую:
+            \item $\dim U = 2, \dim V = 2, \dim U + W \leq 3 \Rightarrow \dim U \cap W \geq 2 + 2 - 3 = 1$ 
+        \end{enumerate}
+
+    \end{example}
+
+    \begin{proof}~
+
+        \begin{enumerate}
+            \item Пусть $\dim U \cap W = p, \dim U = q, \dim W = r$. Пусть $a = \{a_1, \dots, a_p\}$ - базис в $U \cap W$
+            \item Дополним его векторами $b = \{b_1, \dots, b_{q - p}\}$ до базиса в $U$
+            \item Дополним его векторами $c = \{c_1, \dots, c_{k - p}\}$ до базиса в $W$
+            \item Докажем, что $a \cup b \cup c$ - базис в $U + W$ \begin{enumerate}
+                \item $U + W = <a \cup b \cup c>$. Имеем, что $<a \cup b \cup c> \subseteq U + W$
+                \item $v \in U + W \Rightarrow v = u + w, u \in U, w \in W, u \in U = <a \cup b> \subseteq <a \cup b \cup c>, w \in W = <a \cup c> \subseteq <a \cup b \cup c> \Rightarrow v = u + w \in <a \cup b \cup c> \Rightarrow U + W \subseteq <a \cup b \cup c>$
+                \item $a \cup b \cup c$ - линейно независимы
+            \end{enumerate}
+            \item Пусть для некоторых $\alpha_i, \beta_j, \gamma_k \in F$
+            $$\alpha_1 a_1 + \dots + \gamma_{r - p} c_{r - p} = \vec{0}$$
+            \item $z = - x - y \in U$. Так как $z \in W$, то $z \in U \cap W \Rightarrow z = \lambda_1 a_1 + \dots + \lambda_p a_p; \lambda_j \in F \Rightarrow \lambda_1 a_1 + \dots + \lambda_p a_p - \gamma_1 c_1 - \dots - \gamma_{r - p} c_{r - p} = \vec{0}$
+            \item Так как $a \cup c$ линейно независимы (базис $c$ в $W$), то $\lambda_1 = \dots = \gamma_{r - p} = 0$ и $z = 0$, следовательно $\alpha_1 a_1 + \dots + \gamma_{r - p} c_{r - p} = \vec{0}$, так как $A \cup b$ линейно независимы (базис в $U$), то $\alpha_1 = \dots = \beta_{q - p} = 0$
+            \item $a \cup b \cup c$ - базис в $U + W$, следовательно $\dim U + W = |a| + |b| + |c| = p + q - p + r - p = \dim U \cap W$
+        \end{enumerate}
+        
+    \end{proof}
+
+\end{theorem}
