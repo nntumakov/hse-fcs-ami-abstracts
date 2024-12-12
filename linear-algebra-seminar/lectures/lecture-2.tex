@@ -1,0 +1,351 @@
+\section{Лекция 12.12.2024}
+
+
+\subsection{Миноры}
+
+
+\begin{definition}~
+    
+    Пусть $A \in Mat_{m \times n}(F)$.
+    
+    \textit{Подматрицей в A} называется матрица, которая стоит на пересечении некоторых строк и некоторых столбцов
+
+\end{definition}
+
+
+\bigskip
+
+
+\begin{definition}~
+    
+    Пусть $A \in Mat_{m \times n}(F)$.
+
+    \textit{Минором $M_{i_1, \dots, i_k}^{j_1, \dots, j_k}$ порядка $k$} называется определитель подматрицы на пересечении строк $i_1, \dots, i_k$, столбцов $j_1, \dots, j_k$
+
+    \textit{Алгебраическим дополнением (без знака)} это частный случай минора $A_{ij} = (-1)^{(i + j)} M_{i}^{j}$
+
+\end{definition}
+
+
+\bigskip
+
+
+\begin{theorem}~
+    
+    Ранг матрицы равен наибольшему порядку ненулевого минора
+
+    \begin{comment}
+    
+        В матрице $m \times n$ количество миноров порядка $k$ равно $C^k_m \cdot C_n^k$
+
+    \end{comment}
+
+\end{theorem}
+
+
+\bigskip
+
+
+\begin{definition}~
+    
+    Пусть $A \in Mat_{m \times n}(F)$ и $M$ -минор в ней.
+
+    \textit{Минор $M'$ называется окаймляющим к $M$} если $M$ получается из $M'$ вычеркиванием одной строки и одного столбца
+
+\end{definition}
+
+
+\bigskip
+
+
+\begin{theorem} Метод окаймляющих миноров
+    
+    Пусть в $A$ есть ненулевой минор порядка $k$. Тогда в $A$ есть ненулевой минор порядка $k + 1$ в том, и только в том случае, когда среди окаймляющих $M$ миноров найдется ненулевой
+
+    \begin{comment}
+    
+        На $k$-ом шаге достаточно перебрать $(m - k) \cdot (n - k)$ миноров
+
+    \end{comment}
+
+\end{theorem}
+
+
+\bigskip
+
+
+\begin{problem}~
+    
+    Найти $rk A$, где
+
+    $$A = \begin{pmatrix}
+        1 & \lambda & -1 & 2 \\
+        2 & -1 & \lambda & 5 \\
+        1 & 10 & -6 & 1
+    \end{pmatrix}$$
+
+    $$M_{23}^{12} = \left|
+        \begin{matrix}
+            2 & -1 \\
+            1 & 10
+        \end{matrix}
+    \right| \not= 0 \Rightarrow rk A \geq 2$$
+
+    Тогда:
+
+    $$rk A = 2 \Leftrightarrow M_{123}^{123} = M_{123}^{124} = 0$$
+
+\end{problem}
+
+
+\bigskip
+
+
+\begin{problem}~
+
+    Пусть $U = <u_1, \dots, u_l> \subseteq F^n$. Требуется найти ОСЛУ $Ax = 0, \;\; A \in Mat_{m \times n}(F)$, множеством решений которой является $U$
+
+    Обозначим $d = dim U, \;\; u_i = \begin{pmatrix}
+        b_{i1} \\ \vdots \\ b_{in}
+    \end{pmatrix}$
+
+    \begin{lemma} Алгоритм
+        
+        \begin{enumerate}
+            \item $Av_i = 0$. Посмотрим на эти уравнения как на ОСЛУ с коэффицентами - координатами $v_i$ и неизвестными - ячейками в матрице $A$: $a_{k1}b_{l1} + \dots + a_{kn}b_{ln} = 0$
+            \item Записать векторы $u_1, \dots, u_l$ в матрицу $B$ по строкам
+            \item Для ОСЛУ $By = 0$ найти ФСР $v_1, \dots, v_{n - d}$
+            \item В качестве $A$ можно взять матрицу, в которой $v_1, \dots, v_{n - d}$ записаны по строкам
+            \item Докажем, что полученная матрица является искомой: \begin{enumerate}
+                \item $W = \{x | Ax = 0\}$ Так как $Au_l = 0 \forall l = 1, \dots, k$
+                \item $U \subseteq W$
+                \item Никакие другие векторы не подходят. Так как $dim W = n - rk A = n - (n - d) = d$ (Одно подпространство содержится в другом и их размерности совпадают)
+            \end{enumerate}
+        \end{enumerate}
+
+    \end{lemma}
+
+\end{problem}
+
+
+\bigskip
+
+
+\begin{problem}~
+    
+    Найти ОСЛУ, задающее подпространство:
+
+    $$<\left(1, 1, 0, 2\right), \left(3, -3, 2, 0\right), \left(2, -1, 1, 1\right)>$$
+
+    \begin{solution}~
+        
+        \begin{enumerate}
+            \item Находим общее решение: 
+            $$B = \begin{pmatrix}
+                1 & 1 & 0 & 2 \\
+                3 & -3 & 2 & 0 \\
+                2 & -1 & 1 & 1
+            \end{pmatrix} \rightarrow \begin{pmatrix}
+                1 & 0 & 1/3 & 1 \\
+                0 & 1 & -1/3 & 1
+            \end{pmatrix}$$
+            \item Находим ФСР:
+            $$\{\begin{pmatrix}
+                -1/3 \\ 1/3 \\ 1 \\ 0
+            \end{pmatrix}, \begin{pmatrix}
+                -1 \\ -1 \\ 0 \\ 1
+            \end{pmatrix}\}$$
+            \item Записываем в матрицу по строкам:
+            $$A = \begin{pmatrix}
+                -1/3 & 1/3 & 1 & 0 \\
+                -1 & -1 & 0 & 1
+            \end{pmatrix}$$
+        \end{enumerate}
+
+    \end{solution}
+
+\end{problem}
+
+
+\bigskip
+
+
+Зафиксируем векторное пространство $V$ над полем $F$
+
+Пусть $e = \left(e_1, \dots, e_m\right)$ - некоторый набор векторов из $V$ и $e' = \left(e'_1, \dots, e'_k\right)$ - это набор векторов из $<e>$
+
+$\exists c_{ij} \in F$
+
+$e'_j = \sum_{i = 1}^mc_{ij}e_i$
+
+В матричном виде:
+
+$e' = eC$, где
+
+$C = (c_{ij}) \in Mat_{m \times k}(F)$ (то есть в $C$ столбцы записаны выражения векторов $e'_j$)
+
+
+\bigskip
+
+
+\begin{lemma}~
+    
+    Пусть $c = \left(e_1, \dots, e_m\right)$ - линейно - независимы. Тогда $\forall C, D \in Mat_{m \times k}(F)$
+
+    $$eC = eD \rightarrow C = D$$
+
+    \begin{proof}~
+        
+        \begin{enumerate}
+            \item $j$ - й вектор в строках $eC$ и $eD$ равен 
+            $$\sum_{i = 1}^{m}e_i \cdot c_{ij} = \sum_{i = 1}^{m}e_i \cdot d_{ij}$$
+            \item Так как векторы линейно независимы, тогда они выражаются единственным образом ($c_{ij} = d_{ij}$)
+        \end{enumerate}
+
+    \end{proof}
+
+\end{lemma}
+
+
+\bigskip
+
+
+\begin{problem}~
+    
+    Пусть $e = \left(e_1, \dots, e_n\right)$ - базис в $V$ и $e' = \left(e'_1, \dots, e'_n\right)$ - некоторый набор векторов. Обозначим $e = e' \cdot C$. Тогда $e'$ является базисом $Leftrightarrow$ $C$ обратима
+
+    \begin{proof}~
+        
+        \begin{enumerate}
+            \item $e = e' \cdot D$. Тогда $e' = e' \cdot E = e \cdot C = e' \cdot DC$
+            \item По предыдущей задаче получаем, что $DC = E$
+            \item Докажем в обратную сторону. $e' = eC \Rightarrow e'c^{-1} = e \Rightarrow <e'> = V$ и их $n$ штук $Rightarrow$ $e'$ - базис
+        \end{enumerate}
+
+    \end{proof}
+
+\end{problem}
+
+
+\bigskip
+
+
+\begin{definition}~
+    
+    Пусть $e = \left(e_1, \dots, e_n\right)$ и $e' = \left(e'_1, \dots, e'_n\right)$ - базисы $V$. Единственное матрицы $C$, для которой $e' = e C$ называется \textit{матрицей перехода от базиса $e$ к базису $e'$}. Обозначение $C = C_{e \rightarrow e'}$
+
+    \begin{comment}
+    
+        При фиксированном базисе в $V$, все базисы в $V$ описываются невырожденными матрицами $n \times n$
+
+    \end{comment}
+
+\end{definition}
+
+
+\bigskip
+
+
+\begin{properties}~
+
+    Пусть $e, e', e''$ - базисы $V$
+    
+    \begin{enumerate}
+        \item $C_{e \rightarrow e''} = C_{e \rightarrow e'} \cdot C_{e' \rightarrow e''}$
+        \item $C_{e' \rightarrow e} = C^{-1}_{e \rightarrow e \rightarrow e'}$
+    \end{enumerate}
+
+    \begin{proof} 1
+
+        \begin{enumerate}
+            \item $e' = e C_{e \rightarrow e'}, \; e'' = e' C_{e' \rightarrow e''}$
+            \item $e'' = e' C_{e' \rightarrow e''} = e C_{e \rightarrow e'} \cdot C_{e' \rightarrow e''}$
+        \end{enumerate}
+        
+    \end{proof}
+
+    \begin{proof} 2
+
+        \begin{enumerate}
+            \item $e' = eC_{e \rightarrow e'} \Rightarrow e = e' C^{-1}_{e \rightarrow e'} = e' C_{e' \rightarrow e}$ по предыдущей задаче
+        \end{enumerate}
+        
+    \end{proof}
+
+\end{properties}
+
+
+\bigskip
+
+
+\begin{problem}~
+
+    Пусть базисы $e'$ и $e''$ заданы своими координатами в некотором базисе $e$: $e' = eC', \; e'' = e C''$
+
+    Тогда $C_{e' \rightarrow e''} = C_{e' \rightarrow e} \cdot C_{e \rightarrow e''} = (C')^{-1} \cdot C''$
+
+\end{problem}
+
+
+\bigskip
+
+
+\begin{lemma}~
+    
+    Пусть $e, e'$ - базисы в $V$. Рассотрим вектор $v \in V$.
+
+    В первом базисе у него координаты $x_1 e_1 + \dots + x_n e_n = x'_1 e'_1 + \dots + x'_n e'_n$
+
+    В матричном виде:
+
+    $$v = ex = e'x'$$
+
+    Тогда:
+
+    $$ex = e'x' = e C x' \Rightarrow x = C x'$$
+
+    \begin{comment}
+    
+        В частности, чтобы найти координаты в новом базисе, нужно обратить матрицу $C$ (то есть решить СЛУ $(C | x)$)
+
+    \end{comment}
+
+\end{lemma}
+
+
+\bigskip
+
+
+\begin{problem}~
+    
+    Пусть $C \in F$. В пространству $\RR[x]_{\leq n}$:
+    
+    \begin{enumerate}
+        \item матрица перехода от стандартного базиса $1, x, \dots, x^n$ к базису $1, (x - c), \dots, (x - c)^n$
+        \item Найти координаты вектора $f(x) = a_0 + \dots a_n x^n$ в новом базисе
+    \end{enumerate}
+
+    \begin{solution} 1
+
+        \begin{enumerate}
+            \item $e'_k = (x - c)^k = \sum_{i = 0}^{k}C_k^i x^i (-c)^{k - i} = \sum_{i = 0}^{k}C_k^i (-c)^{k - i}e_i $
+            $$C = \begin{pmatrix}
+                1 & -c & \dots & (-c)^k & \dots \\
+                0 & 1 & \dots & k (-c)^{k - 1} \\
+                0 & 0 & \dots & C_k^2 (-c)^{k - i} \\
+                0 & 0 & \dots & \vdots \\
+                \vdots & \vdots & \dots & \ddots
+            \end{pmatrix}$$
+            \item Базис: $y = \begin{pmatrix}
+                a_0 \\ a_1 \\ \vdots \\ a_n
+            \end{pmatrix}$. В новом базисе: $z = \begin{pmatrix}
+                z_0 \\ z_1 \\ \vdots \\ z_n
+            \end{pmatrix}$
+            \item $y = Cz, \; z = c^{-1} y$
+            \item Можно обратить:
+            $$f(x) = f(x - c + c) = \sum_{i = 0}^{n}a_i ((x - c) + c)^i$$
+        \end{enumerate}
+        
+    \end{solution}
+
+\end{problem}
