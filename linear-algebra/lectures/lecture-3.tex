@@ -1,0 +1,179 @@
+\section{Лекция 16.12.2024}
+
+
+\begin{lemma}~
+    
+    $V$ - векторное пространство над полем $F, \dim V < \infty$
+    
+    $U, W \subseteq V$ - подпространства
+    
+    Новые пространства:
+
+    \begin{enumerate}
+        \item $U \cap W$
+        \item $U + W = \{u + w \; | \; u \in U, \; w \in W\}$
+    \end{enumerate}
+
+    \begin{comment}
+        
+        $$\dim(U \cap W) + \dim(U + W) = \dim U + \dim W$$
+
+    \end{comment}
+
+\end{lemma}
+
+
+\bigskip
+
+
+\begin{definition}~
+    
+    Пусть $U_1, \dots, U_m$ - набор подпространтсв
+
+    \textit{Сумма подпространтсв $U_1, dots, U_m$} - это 
+    
+    $$U_1 + \dots + U_m = \{u_1 + \dots + u_2 \; | \; u_1 \in U_1, \dots u_m \in U_m\}$$
+
+    \begin{comment}
+        
+        Сумма подпространств является подпространством.
+
+        $$\dim(U_1 + \dots + U_m) \leq \dim U_1 + \dots + \dim U_m$$
+
+    \end{comment}
+
+\end{definition}
+
+
+\bigskip
+
+
+\begin{definition}~
+    
+    \textit{Подпространста $U_1, \dots, U_k$} называются линейно независимыми, если $\forall u_1 \in U_1, \dots, u_k \in U_k$ из условия $u_1 + \dots + u_k = \vec{0}$ следует $u_1 = \dots = u_k = \vec{0}$
+
+    \begin{example}
+        
+        $\dim U_i = 1, \; \forall i, U_i = <e_i>$ следует $U_1, \dots, U_k$ линейно независимые, что равносильно линейной независимости $e_i$
+
+    \end{example}
+
+\end{definition}
+
+
+\bigskip
+
+
+\begin{theorem}~
+    
+    Слудующие условия эквиваленты:
+
+    \begin{enumerate}
+        \item $U_1, \dots, U_k$ линейно независимые
+        \item $\forall u \in U_1 + \dots + U_k: \; \exists u_i \in U_i$, такие что $u = u_1 + \dots + u_k$
+        \item если $e_i$ - базис в $U_i$, то $e_1 \cup \dots \cup e_k$ - базис в $U_1 + \dots + U_k$
+        \item $\dim(U_1 + \dots + U_k) = \dim U_1 + \dots + \dim U_k$
+        \item $\forall i: \; U_i \cap (\sqcup_{j \not= i}U_{j} = \{\vec{0}\})$ (Объединение мультимножеств: $\sqcup$)
+    \end{enumerate}
+
+    \begin{proof} $1 \rightarrow 2$
+
+        \begin{enumerate}
+            \item Пусть $u \in U_1 + \dots + U_k$ и существуют 2 представления $u = u_1 + \dots + u_k = u'_1 + \dots + u'_k$
+            \item Вычтем: $(u_1 - u'_1) + \dots + (u_k - u'_k) = \vec{0} \Rightarrow u_i = u'_i$
+        \end{enumerate}
+        
+    \end{proof}
+
+    \begin{proof} $2 \rightarrow 3$
+
+        \begin{enumerate}
+            \item Пусть $u \in U_1 + \dots + U_k$ в силу условия 2 $u = u_1 + \dots + u_k$ (однозначно представлен)
+            \item Так как $e_i$ - базис в $U_i$, то всякий $u_i$ - единственным образом представим в виде линейной комбинации векторов из $e_i$
+            \item Знаем, что $u$ - однозначно представим в виде линейной комбинации векторов из $\sqcup_{i}e_i$, следовательно $\sqcup_{i}e_i$ - базис в сумме
+        \end{enumerate}
+        
+    \end{proof}
+
+    \begin{proof} $3 \rightarrow 4$
+
+        $\dim(U_1 + \dots + U_m) = |\sqcup e_i| = |e_1| + \dots + |e_m| = \dim U_1 + \dots + \dim U_k$
+        
+    \end{proof}
+
+    \begin{proof} $4 \rightarrow 5$
+
+        \begin{enumerate}
+            \item $\overline{U_i} = U_1 + \dots + U_{i - 1} + U_{i + 1} + U_k$
+            \item $\dim(U_i \cap \overline{U_i}) = \dim U_i + \dim \overline{U_i} - \dim (U_i + \overline{U_i}) \leq \dim U_i + \dim U_1 + \dots \dim U_k - \dim U_1 - \dots - \dots \dim U_k = 0$
+            \item $\dim (U_i \cap \overline{U_i}) \leq 0$
+        \end{enumerate}
+        
+    \end{proof}
+
+    \begin{proof} $5 \rightarrow 1$
+
+        \begin{enumerate}
+            \item Пусть $u_1 \in U_1, \dots, u_k \in U_k$, таковы, что $u_1 + u_k = \vec{0}$. Тогда для любого номера $u_i = - u_1 - \dots u_{i - 1} - u_{i + 1} - \dots u_k \in U_i \cap \overline{U_i} = \vec{0}$
+        \end{enumerate}
+        
+    \end{proof}
+
+    \begin{corollary}
+    
+        Подпространста $U, W \subseteq V$ линейно независимы, что равносильно $U \cap W = \{\vec{0}\}$
+
+    \end{corollary}
+
+\end{theorem}
+
+
+\bigskip
+
+
+\begin{definition} Разложение в прямую сумму
+    
+    Говорят, что векторы разлагаются в прямую сумму своих подпространств $U_1, \dots, U_k$, если:
+
+    $$U_1, \dots, U_k$$
+
+    и обозначают: $U_1 \oplus \dots \oplus U_k$
+
+    \begin{example}
+        
+        $e_1, \dots, e_n$ - базис в $V$, то 
+
+        $V = <e_1> \oplus \dots \oplus <e_n>$
+
+    \end{example}
+
+    \begin{comment}
+        
+        \begin{enumerate}
+            \item При $k = 2$
+            \item $V = U_1 \oplus U_2 \Leftrightarrow \begin{cases}
+                V = U_1 + U_2 \\
+                U_1 \cap U_2 = \vec{0}
+            \end{cases} \Leftrightarrow \begin{cases}
+                \dim V = \dim U_1 + \dim U_2 \\
+                U_1 \cap U_2 = \{\vec{0}\}
+            \end{cases}$
+            \item $V = U_1 \oplus U_2 \Rightarrow \forall v \in V: \; \exists ! u_1 \in U_1, u_2 \in U_2: \; V = U_1 + U_2$
+        \end{enumerate}
+
+    \end{comment}
+
+\end{definition}
+
+
+\bigskip
+
+
+\begin{definition}
+    
+    В этой ситуации $u_1$ \textit{проекцией} вектора $v$ на подпространтсво $U_1$ вдоль подпространства $U_2$
+
+\end{definition}
+
+
+\subsection{Линейные отображения - в слайдах}
