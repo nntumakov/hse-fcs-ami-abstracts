@@ -1,0 +1,238 @@
+\section{Лекция 10.01.2024}
+
+\subsection{Сумма и пересечение пространств}
+
+\subsubsection{Способы задания подпространств в $F^n$}
+
+\begin{enumerate}
+  \item Как линейная оболочка векторов
+  \item Как множество решений некоторой ОСЛУ
+\end{enumerate}
+
+\begin{comment}~
+
+    Переход между ними сводится к поиску ФСР
+\end{comment}
+
+\begin{lemma}
+
+  \begin{enumerate}
+    \item Если $U = <u_1, \dots, u_k>$ и $W = <w_1, \dots, w_n>$, то $U + W = <u_1, \dots, u_k, w_1, \dots, w_n$
+    \item Если $U: Ax = 0$ и $W: Bx = 0$, то $U \cap W:
+      \begin{pmatrix}
+        A \\ B
+      \end{pmatrix} x = 0$
+  \end{enumerate}
+
+\end{lemma}
+
+\bigskip
+
+\begin{problem}~
+
+  Для заданных (I или II способом)
+
+  $U, W \in F^n$. Найти базис $U + W$ и базис $U \cap W$
+
+  \begin{enumerate}
+    \item Если $U$ и $W$ заданы первым способом, то легко найти базис $U + W$
+    \item Если $U$ и $W$ заданы вторым способом, то легко найти базис $U \cap W$
+    \item В общем случае можно перейти к удобному способу задания
+  \end{enumerate}
+
+\end{problem}
+
+\bigskip
+
+\begin{problem}~
+
+  Найти базис суммы и базис пересечения для:
+
+  $U = <
+  \begin{pmatrix}
+    1 \\ 2 \\ 0 \\ 1
+  \end{pmatrix},
+  \begin{pmatrix}
+    1 \\ 1 \\ 1 \\ 0
+  \end{pmatrix}, \; W = <
+  \begin{pmatrix}
+    1 \\ 0 \\ 1 \\ 0
+  \end{pmatrix},
+  \begin{pmatrix}
+    1 \\ 3 \\ 0 \\ 1
+  \end{pmatrix}>$
+
+  \begin{solution}
+
+    \begin{enumerate}
+      \item Записываем в систему по столбцам и пользуемся элементарными преобразованиями строкам, что дает сохранение линейных зависимостей
+        $$U + W = <
+        \begin{pmatrix}
+          1 \\ 2 \\ 0 \\ 1
+        \end{pmatrix},
+        \begin{pmatrix}
+          1 \\ 1 \\ 1 \\ 0
+        \end{pmatrix},
+        \begin{pmatrix}
+          1 \\ 0 \\ 1 \\ 0
+        \end{pmatrix}>$$
+      \item Записываем в систему по строкам и пользуемся элементарными преобразованиями строк, что дает сохранение линейной оболочки
+      \item Записываем векторы двух систем по строкам
+        $$U \cap W:
+        \begin{pmatrix}
+          -2 & 1 & 1 & 0 \\
+          1 & -1 & 0 & 1 \\
+          -3 & 1 & 3 & 0 \\
+          0 & -1 & 0 & 3
+        \end{pmatrix} \leadsto
+        \begin{pmatrix}
+          1 & 0 & 0 & -2 \\
+          0 & 1 & 0 & -3 \\
+          0 & 0 & 1 &
+        \end{pmatrix}$$
+      \item Базис $U \cap W:
+        \begin{pmatrix}
+          2 & 3 & 1 & 1
+        \end{pmatrix}$
+    \end{enumerate}
+
+  \end{solution}
+
+\end{problem}
+
+\bigskip
+
+\begin{theorem}~
+
+  $U, W \leq V$ - подпространства, то $\dim(U + W) = \dim U + \dim W - \dim(U \cap W)$
+
+  \begin{comment}~
+    В частности, если из этих 4-ех чисел известо 3, то и 4-ое можно легко найти.
+
+    Пэтому, если $U, W \in F^n$ заданы одним и тем же способом, то задача вычислить $\dim(U + W)$ и $\dim(U \cap W)$ решается легко
+  \end{comment}
+
+\end{theorem}
+
+\bigskip
+
+\begin{lemma} Алгоритм:
+
+  Альтернативный способ построения базиса $U \cap W$ для $U, W$ заданных 1 способом
+
+  Пусть $U = <u_1, \dots, u_k>, W = <w_1, \dots, w_l>$
+
+  \begin{enumerate}
+    \item $\forall v \in U \cap W: \exists \alpha_i, \mu_j: v = \dots$
+    \item Это ОСЛУ на коэффиценты $\alpha_i, \mu_j$. $\lambda_1 \cdot u_1 + \dots + \lambda_k \cdot u_k - \mu_1 \cdot w_1 - \dots - \mu_l \cdot w_l = 0$
+  \end{enumerate}
+
+  \begin{enumerate}
+    \item Записать векторы $u_1, \dots, u_k$ в столбцы матрицы $B$
+    \item Привести матрицу $(A|B)$ к улучшенному ступенчатому виду (целиком)
+    \item По улучшенному ступенчатому виду выписать ФСР для нашей ОСЛУ (на самом деле мы ищем ФСР для матрицы $(A|-B)$)
+    \item Для каждого элемента $(\lambda_1, \dots, \lambda_k, \mu_1, \dots, \mu_l)$ из ФСР находим вектор $v$ по одной из формул: $v = \lambda_1 \cdot u_1 + \dots + \lambda_k \cdot u_k = \mu_1 \cdot w_1 + \dots + \mu_l \cdot w_l$
+    \item Полученный набор векторов $v$ порождают $U \cap W$, остается выделить базис их линейной оболочки
+  \end{enumerate}
+
+  \begin{comment}
+    Если $U, W$ заданы первым способом, то для нахождения базиса суммы нужно привести ту же матрицу $(A|B)$ к ступенчатому виду
+  \end{comment}
+
+\end{lemma}
+
+\bigskip
+
+\begin{problem}~
+
+  Альтернативный способ для $U$ и $W$ из задачи 1
+
+  \begin{solution}
+    \begin{enumerate}
+      \item $A =
+        \begin{pmatrix}
+          1 & 1 \\
+          2 & 1 \\
+          0 & 1 \\
+          1 & 0
+        \end{pmatrix}, \; B =
+        \begin{pmatrix}
+          1 & 1 \\
+          0 & 3 \\
+          1 & 0 \\
+          0 & 1
+        \end{pmatrix}$
+      \item $(A|B) \leadsto
+        \begin{pmatrix}
+          1 & 1 & 1 & 1 \\
+          0 & -1 & 2 & 1 \\
+          0 & 0 & -1 & 1 \\
+        \end{pmatrix} \leadsto
+        \begin{pmatrix}
+          1 & 0 & 0 & 1 \\
+          0 & 1 & 0 & 7 \\
+          0 & 0 & 1 & -1 \\
+        \end{pmatrix}$
+      \item ФСР: $
+        \begin{pmatrix}
+          1 & 1 & 1 & 1
+        \end{pmatrix}$
+      \item $v = 1 \cdot
+        \begin{pmatrix}
+          1 \\ 2 \\ 0 \\ 1
+        \end{pmatrix} + 1 \cdot
+        \begin{pmatrix}
+          1 \\ 1 \\ 1 \\ 0
+        \end{pmatrix} =
+        \begin{pmatrix}
+          2 \\ 3 \\ 1 \\ 1
+        \end{pmatrix} = 1 \cdot
+        \begin{pmatrix}
+          1 \\ 0 \\ 1 \\ 0
+        \end{pmatrix} + 1 \cdot
+        \begin{pmatrix}
+          1 \\ 3 \\ 0 \\ 1
+        \end{pmatrix}$
+      \item Базис $U \cap W: \left(
+          \begin{pmatrix}
+            2 \\ 3 \\ 1 \\ 1
+        \end{pmatrix}\right)$
+    \end{enumerate}
+  \end{solution}
+
+\end{problem}
+
+\bigskip
+
+\begin{lemma}~
+
+  Если в альтернативном алгоритме каждый из 2-х наборов $u_1, \dots, u_k$ и $w_1, \dots, w_l$ является базисом, то полученные на шаге 4 векторы $v$ автоматически образуют вектор пересечения (5 шаг не нужен)
+
+  \begin{proof}
+    \begin{enumerate}
+      \item Пусть $s$ - количество векторов в ФСР, полученной на шаге 3, тогда $s = (k + l) - rk(A|B) = \dim U + \dim W - \dim(U + W) = \dim(U \cap W)$
+      \item
+    \end{enumerate}
+  \end{proof}
+
+  \begin{comment}
+    Формула включения-исключения не обощается для размерностей множеств. Для $n = 3$ можно построить контр-пример
+
+    Проблема возникает из-за $U_1 \cap (U_2 + U_3) \not= U_1 \cap U_2 + U_1 \cap U_3$
+  \end{comment}
+
+\end{lemma}
+
+\bigskip
+
+\begin{problem}~
+
+  Пусть $A \in M_n(F)$, $\overline{A}$ - присоединенная матрица
+
+  \begin{enumerate}
+    \item $rkA = n \Rightarrow rk\overline{A}$ (так как она обратима)
+    \item $rkA \leq n - 2 \Rightarrow \overline{A} = 0 \Rightarrow rk \overline{A}$
+    \item $rk = n - 1 \Rightarrow rk \overline{A} = 1$
+  \end{enumerate}
+
+\end{problem}
